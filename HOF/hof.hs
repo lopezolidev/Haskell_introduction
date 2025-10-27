@@ -1,0 +1,2 @@
+-- higher order functions: functions that are treated as any other object and can be passed to another function
+-- can operate over a list, symbols of operations (+ *), single arguments and other functions
