@@ -168,3 +168,73 @@ elem 7 [1, 2, 3, 4, 5]
 
 'd' `elem` ['b', 'c', 'd', 'e']
 -- True
+
+-- Ranges...
+
+take 12 (cycle "hello ")
+-- "hello hello "
+
+take 12 (repeat "hello ")
+-- ["hello ","hello ","hello ","hello ","hello ","hello ","hello ","hello ","hello ","hello ","hello ","hello "]
+
+replicate 3 "house"
+-- ["house","house","house"]
+
+-- the lower limit will increase up until the upper limit, unless that the lower limit is already greater than the upper
+[20..1]
+-- []
+
+-- reverse list printing
+[20,18..1]
+-- [20,18,16,14,12,10,8,6,4,2]
+
+-- ascii characters listing
+['1'..'z']
+-- "123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz"
+
+[1..20]
+-- [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+-- all the multiples of 13
+[13, 26.. 24 * 13]
+-- [13,26,39,52,65,78,91,104,117,130,143,156,169,182,195,208,221,234,247,260,273,286,299,312]
+
+replicate 4 7
+-- [7,7,7,7]
+
+-- only will be computed the 24 numbers from the infinite list, and this list is not computed, only declared
+take 24 [13, 26..]
+-- [13,26,39,52,65,78,91,104,117,130,143,156,169,182,195,208,221,234,247,260,273,286,299,312]
+
+removeLowerCase st = [x | x <- st, x `elem` ['A'..'Z']]
+removeLowerCase "SDKABSDKajbasdjkASjkbakjACJKkjACJKACj"
+-- "SDKABSDKASACJKACJKAC"
+
+length' xs = sum [1 | _ <- xs]
+length' "hello"
+-- 5
+
+nouns = ["hobo", "frog", "pope"]
+adjectives = ["lazy", "grouchy", "scheming"]
+[noun ++ " " ++ adjective | noun <- nouns, adjective <- adjectives]
+-- ["hobo lazy","hobo grouchy","hobo scheming","frog lazy","frog grouchy","frog scheming","pope lazy","pope grouchy","pope scheming"]
+
+[x *  y | x <- [5 , 2, 10], y <- [8, 10, 11], x*y > 50]
+-- [55,80,100,110]
+
+[x + y | x <- [1 , 2, 3], y <- [10, 100, 1000]]
+-- [11,101,1001,12,102,1002,13,103,1003]
+
+boomBang xs = [if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
+boomBang [5.. 20]
+-- ["BOOM!","BOOM!","BOOM!","BANG!","BANG!","BANG!","BANG!","BANG!"]
+
+[x | x <- [10 .. 20], x /= 13, x /= 15, x /= 19]
+-- [10,11,12,14,16,17,18,20]
+
+[x * 2 | x <- [1..20], x * 2 >= 12 ] 
+-- [12,14,16,18,20,22,24,26,28,30,32,34,36,38,40]
+
+
+[x * 2 | x <- [50..100], x `mod` 7 == 3 ] 
+-- [104,118,132,146,160,174,188]
