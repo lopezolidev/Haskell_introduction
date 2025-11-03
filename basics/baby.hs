@@ -169,8 +169,6 @@ elem 7 [1, 2, 3, 4, 5]
 'd' `elem` ['b', 'c', 'd', 'e']
 -- True
 
--- Ranges...
-
 take 12 (cycle "hello ")
 -- "hello hello "
 
@@ -179,6 +177,10 @@ take 12 (repeat "hello ")
 
 replicate 3 "house"
 -- ["house","house","house"]
+
+---------------------------------------------------------------------------------------------------------------------------------------
+-- Ranges...
+
 
 -- the lower limit will increase up until the upper limit, unless that the lower limit is already greater than the upper
 [20..1]
@@ -205,6 +207,9 @@ replicate 4 7
 -- only will be computed the 24 numbers from the infinite list, and this list is not computed, only declared
 take 24 [13, 26..]
 -- [13,26,39,52,65,78,91,104,117,130,143,156,169,182,195,208,221,234,247,260,273,286,299,312]
+
+----------------------------------------------------------------------------------------------------------------------------------------
+-- list comprehensions
 
 removeLowerCase st = [x | x <- st, x `elem` ['A'..'Z']]
 removeLowerCase "SDKABSDKajbasdjkASjkbakjACJKkjACJKACj"
@@ -238,3 +243,58 @@ boomBang [5.. 20]
 
 [x * 2 | x <- [50..100], x `mod` 7 == 3 ] 
 -- [104,118,132,146,160,174,188]
+
+xxs = [[1, 3, 5, 2, 3, 1, 2, 4, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 4, 2, 1, 6, 3, 1, 3, 2, 3, 6]]
+[ [x | x <- xs, even x] | xs <- xxs ]
+-- [[2,2,4],[2,4,6,8],[2,4,2,6,2,6]]
+-- filtering individual items inside a list of lists. 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+-- tuples: heterogenous collections of elements that its length is a distinctive property of their structure
+
+(1, 3)
+
+(3, 'a', "hello")
+
+(50, 50.4, "hello", 'b')
+
+[(1, 2), (8, 11, 5), (4, 5)]
+-- <interactive>:7:10: error: [GHC-83865]
+--     • Couldn't match expected type: (a, b)
+--                   with actual type: (a0, b0, c0)
+--     • In the expression: (8, 11, 5)
+--       In the expression: [(1, 2), (8, 11, 5), (4, 5)]
+--       In an equation for ‘it’: it = [(1, 2), (8, 11, 5), (4, 5)]
+--     • Relevant bindings include
+--         it :: [(a, b)] (bound at <interactive>:7:1)
+
+fst (8, 11)
+-- 8
+snd (8, 11)
+-- 11
+snd ("wow", False)
+-- False
+snd ("wow", False, 1) -- only works for tuples with 2 elements
+-- <interactive>:13:5: error: [GHC-83865]
+--     • Couldn't match expected type: (a0, b)
+--                   with actual type: (String, Bool, c0)
+--     • In the first argument of ‘snd’, namely ‘("wow", False, 1)’
+--       In the expression: snd ("wow", False, 1)
+--       In an equation for ‘it’: it = snd ("wow", False, 1)
+--     • Relevant bindings include it :: b (bound at <interactive>:13:1)
+
+zip [1, 2, 3, 4, 5] [5, 5, 5, 5, 5]
+-- [(1,5),(2,5),(3,5),(4,5),(5,5)]
+
+zip [1.. 5] ["one", "two", "three", "four", "five"]
+-- [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
+
+zip [5, 3, 2, 6, 2, 7, 2, 5, 4, 6, 6] ["im", "a", "turtle"]
+-- [(5,"im"),(3,"a"),(2,"turtle")] ← the limiting list will determine the size of the list of tuples
+
+
+zip [1..] ["apple", "orange", "cherry", "mango"]
+-- [(1,"apple"),(2,"orange"),(3,"cherry"),(4,"mango")] ← therefore we can use infinite lists to make sequential tuples
+
+
