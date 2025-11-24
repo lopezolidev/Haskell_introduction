@@ -7,3 +7,12 @@ operarZyXS z (x:xs)
             (cuantosLlevo, listaLimpia) = operarZyXS z xs
 
 -- usando recursión con paso de tuplas
+
+noDoble :: [Char] -> [Char]
+noDoble [] = []
+noDoble [x] = [x]
+noDoble (x:y:xs)
+        | x == y = noDoble(x:noDoble xs)
+        | otherwise = x:y:noDoble xs
+-- solución doblemente recursiva
+-- Ineficiente
