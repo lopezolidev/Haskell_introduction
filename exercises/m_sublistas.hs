@@ -1,4 +1,3 @@
-import Distribution.SPDX.LicenseId (licenseIdMigrationMessage)
 mSublistas :: (Eq a) => [a] -> a -> [[a]]
 mSublistas [] _ = [[]]
 mSublistas lista e 
